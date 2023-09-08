@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const TodoList = () => {
-    const initialState = [
+    const [todos, setTodos] = useState([
         {
             task: "Learn vue.js",
             isCompleted: false,
@@ -14,8 +14,7 @@ const TodoList = () => {
             task: "Learn Getsby.js",
             isCompleted: false,
         }
-    ];
-    const [todos, setTodos] = useState(initialState);
+    ]);
     const [task, setTask] = useState('');
     const handleNewTask = (e) => {
         setTask(e.target.value);
@@ -28,6 +27,11 @@ const TodoList = () => {
         setTodos((todos) => [...todos, { task, isCompleted: false }]);
         setTask('');
     }
+    const handleDeleteTask = (index) => {
+        const newTodos = [...todos];
+        newTodos.splice(index, 1);
+        setTodos(newTodos);
+    };
 
     return (
         <div>
@@ -39,7 +43,7 @@ const TodoList = () => {
             <ul>
                 {todos.map((todo, index) => (
                     <li key={index}>
-                        {todo.task}
+                        {todo.task} <span style={{ cursor: 'pointer' }} onClick={() => handleDeleteTask(index)}> [×] </span>
                     </li>
                 ))}
             </ul>
