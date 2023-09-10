@@ -75,7 +75,7 @@ const TodoList = () => {
   return (
     <div>
       <HStack>
-        <h1>やることリスト </h1>
+        <h1 style={{ marginRight: "20px" }}>やることリスト </h1>
         <form onSubmit={handleSubmit}>
           タスクを追加 :{" "}
           <input placeholder="新しいタスクを追加" onChange={handleNewTask} />
