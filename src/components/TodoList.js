@@ -1,5 +1,6 @@
 import { HStack } from "@chakra-ui/react";
 import { useState } from "react";
+import { AiOutlineDelete } from "react-icons/ai";
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
@@ -41,6 +42,36 @@ const TodoList = () => {
     }
   };
 
+  const DisplayTodoList = ({ Tasks }) => {
+    return (
+      <ul>
+        {Tasks.map((todo, index) => (
+          <li style={{ listStyle: "none" }} key={index}>
+            <input
+              type="checkbox"
+              checked={todo.isCompleted}
+              onChange={() => handleUpdatedTask(todo.id, todo.isCompleted)}
+              style={{ marginRight: "20px" }}
+            />
+            <span style={{ fontWeight: "bold" }}>{todo.task}</span>
+            <span
+              style={{ cursor: "pointer" }}
+              onClick={() => handleDeleteTask(todo.id)}
+            >
+              <AiOutlineDelete
+                style={{
+                  verticalAlign: "middle",
+                  marginBottom: "1px",
+                  marginLeft: "4px",
+                }}
+              />
+            </span>
+          </li>
+        ))}
+      </ul>
+    );
+  };
+
   return (
     <div>
       <HStack>
@@ -51,45 +82,9 @@ const TodoList = () => {
           <button type="submit">追加</button>
         </form>
       </HStack>
-      <ul>
-        {todos.map((todo, index) => (
-          <li key={index}>
-            <input
-              type="checkbox"
-              checked={todo.isCompleted}
-              onChange={() => handleUpdatedTask(todo.id, todo.isCompleted)}
-            />
-            {todo.task}{" "}
-            <span
-              style={{ cursor: "pointer" }}
-              onClick={() => handleDeleteTask(todo.id)}
-            >
-              {" "}
-              [×]{" "}
-            </span>
-          </li>
-        ))}
-      </ul>
+      <DisplayTodoList Tasks={todos} />
       <h2>完了したタスク</h2>
-      <ul>
-        {finishied.map((finish, index) => (
-          <li key={index}>
-            <input
-              type="checkbox"
-              checked={finish.isCompleted}
-              onChange={() => handleUpdatedTask(finish.id, finish.isCompleted)}
-            />
-            {finish.task}{" "}
-            <span
-              style={{ cursor: "pointer" }}
-              onClick={() => handleDeleteTask(finish.id)}
-            >
-              {" "}
-              [×]{" "}
-            </span>
-          </li>
-        ))}
-      </ul>
+      <DisplayTodoList Tasks={finishied} />
     </div>
   );
 };
