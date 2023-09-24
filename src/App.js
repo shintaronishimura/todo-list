@@ -1,10 +1,9 @@
-import TodoList from "./components/TodoList";
-
+import { StudyTest, StudyTest as ToggleButton } from "./components/StudyTest";
 
 function App() {
   return (
-    <div style={{ margin: '2em' }}>
-      <TodoList />
+    <div style={{ margin: "2em" }}>
+      <StudyTest />
     </div>
   );
 }

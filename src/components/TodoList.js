@@ -42,6 +42,12 @@ const TodoList = () => {
     }
   };
 
+  const aiOutLineDelete = {
+    verticalAlign: "middle",
+    marginBottom: "1px",
+    marginLeft: "4px",
+  };
+
   const DisplayTodoList = ({ Tasks }) => {
     return (
       <ul>
@@ -58,13 +64,7 @@ const TodoList = () => {
               style={{ cursor: "pointer" }}
               onClick={() => handleDeleteTask(todo.id)}
             >
-              <AiOutlineDelete
-                style={{
-                  verticalAlign: "middle",
-                  marginBottom: "1px",
-                  marginLeft: "4px",
-                }}
-              />
+              <AiOutlineDelete style={aiOutLineDelete} />
             </span>
           </li>
         ))}
@@ -78,7 +78,12 @@ const TodoList = () => {
         <h1 style={{ marginRight: "20px" }}>やることリスト </h1>
         <form onSubmit={handleSubmit}>
           タスクを追加 :{" "}
-          <input placeholder="新しいタスクを追加" onChange={handleNewTask} />
+          <input
+            type="text"
+            value={task}
+            placeholder="新しいタスクを追加"
+            onChange={handleNewTask}
+          />
           <button type="submit">追加</button>
         </form>
       </HStack>
